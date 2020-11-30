@@ -1,0 +1,72 @@
+{% extends 'usernavigation.html'%}
+{%block body%}
+{%load static%}
+<div class="container mt-5">
+    <h2 class="text-center">UPLOAD NOTES</h2>
+            <hr>
+    <div class="row">
+
+        <div class="col-sm-6">
+
+            <form method="post"  enctype="multipart/form-data">
+                {% csrf_token %}
+                <label>Branch</label>
+                <select class="form-control" name="branch">
+                    <option value="">---Select Branch---</option>
+                    <option value="Computer science">Computer science</option>
+                    <option value="Mechanical">Mechanical</option>
+                    <option value="Civil">Civil</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Electrical">Electrical</option>
+
+                </select>
+
+                <label>Subject</label>
+                <input type="text" class="form-control" placeholder="Enter Subject Name" name="subject">
+
+                <label>Notes File</label>
+                <input type="file" class="form-control" name="notesfile">
+
+                <label>File Type</label>
+                <select class="form-control" name="filetype">
+                    <option value="">---Select FIle Type---</option>
+                    <option value="Computer science">PDF</option>
+                    <option value="Mechanical">PPT</option>
+                    <option value="Civil">DOC/DOCX</option>
+                    <option value="Electronics">TXT</option>
+                    <option value="Electrical">Image</option>
+                    <option value="Electrical">ZIP/RAR</option>
+                </select>
+
+                <label>Description</label>
+                    <textarea class="form-control" name="description">
+                    </textarea>
+
+
+                    <input type="submit" class="btn btn-danger mt-2" value="SUBMIT">
+            </form>
+        </div>
+
+        <div class="col-sm-6">
+            <img src="{%static 'images/note3.jpg'%}" style="width:90%; height:400px;" class="mt-2">
+        </div>
+    </div>
+
+</div>
+{% ifequal error "no" %}
+<script>
+    alert('Notes Uploaded Successfully!');
+    window.location=('{% url 'view_mynotes'%}')
+
+</script>
+{% endifequal %}
+
+{% ifequal error "yes" %}
+<script>
+    alert('oops! Something Went Wrong! Try Again');
+
+</script>
+{% endifequal %}
+
+
+{%endblock%}
